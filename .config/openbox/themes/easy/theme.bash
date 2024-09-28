@@ -33,10 +33,10 @@ wdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 wallpaper="$wdir/wallpaper"
 
 # Polybar
-polybar_font='Iosevka Nerd Font:size=12;4'
+polybar_font='JetBrains Mono:size=11;4'
 
 # Rofi
-rofi_font='Iosevka 10'
+rofi_font='JetBrains Mono 10'
 rofi_icon='Arc-Circle'
 
 # Terminal
@@ -59,7 +59,7 @@ ob_layout='LIMC'
 ob_font='JetBrains Mono'
 ob_font_size='12'
 ob_menu='menu-simple.xml'
-ob_margin_t='66'
+ob_margin_t='58'
 ob_margin_b='10'
 ob_margin_l='10'
 ob_margin_r='10'

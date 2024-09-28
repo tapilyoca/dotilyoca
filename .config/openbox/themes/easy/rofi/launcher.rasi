@@ -109,7 +109,7 @@ prompt {
 }
 textbox-prompt-colon {
     enabled:                     true;
-    padding:                     8px 0px;
+    padding:                     8px 10px;
     expand:                      false;
     str:                         "";
     background-color:            inherit;
