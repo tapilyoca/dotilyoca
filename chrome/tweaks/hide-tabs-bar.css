@@ -1,0 +1,124 @@
+/* Edge-Frfox - tweaks/hide-tabs-bar.css
+ * https://github.com/bmFtZQ/edge-frfox */
+
+/* Only hide the tabs toolbar if one of the following sidebar extensions is
+ * active: */
+/* Sidebery */
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])),
+/* Tree Style Tab */
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:not([hidden])),
+/* Tab Center Reborn */
+:root:not([customizing]):has(#sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"]:not([hidden])) {
+  /* Height of navbar, used for determining height and position of window controls */
+  --uc-navbar-height: 38px;
+  /* Drag space next to the window controls, allows you to move the window more easily */
+  --uc-titlebar-drag-space: 40px;
+
+  /* Hide the tabs */
+  & #TabsToolbar {
+    visibility: collapse !important;
+  }
+
+  /* Fix issue with missing window controls. */
+  &[tabsintitlebar] #titlebar {
+    will-change: auto !important;
+  }
+
+  /* Add some padding to the top of the navbar */
+  &[tabsintitlebar] #nav-bar {
+    padding-top: var(--uc-tab-top-margin, 0) !important;
+  }
+
+  /* Set background colour of the menu bar to maintain consistency with the navbar */
+  @media not (-moz-bool-pref: "uc.tweak.floating-tabs") {
+    #toolbar-menubar {
+      background-color: var(--toolbar-bgcolor) !important;
+      color: var(--toolbar-color) !important;
+    }
+  }
+
+  /* Make sure window controls are removed in full screen mode. */
+  &[inDOMFullscreen] #TabsToolbar .titlebar-buttonbox,
+  &[inFullscreen] #navigator-toolbox[style*="margin-top"] #TabsToolbar .titlebar-buttonbox {
+    visibility: collapse !important;
+  }
+
+  /* Sidebar tweaks */
+  --sidebar-background-color: var(--toolbar-bgcolor) !important;
+  --sidebar-text-color: var(--toolbar-color) !important;
+  --sidebar-border-color: var(--chrome-content-separator-color) !important;
+
+  /* Floating tabs tweak uses the tab toolbar background instead. */
+  @media (-moz-bool-pref: "uc.tweak.floating-tabs") {
+    --sidebar-background-color: var(--lwt-accent-color) !important;
+    --sidebar-text-color: var(--lwt-text-color) !important;
+
+    &:-moz-window-inactive {
+      --sidebar-background-color: var(--lwt-accent-color-inactive) !important;
+      --sidebar-text-color: var(--lwt-text-color-inactive) !important;
+    }
+  }
+
+  /* Use :where() to lower specificity. */
+  :where(&) #sidebar-box {
+    position: relative;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    & #sidebar-header {
+      border-bottom: 0 !important;
+      padding: 10px 4px 0 !important;
+      overflow: hidden;
+      position: relative;
+
+      & #sidebar-switcher-target,
+      & #sidebar-close {
+        width: auto !important;
+        height: 28px !important;
+        padding: 0 8px !important;
+        border: none !important;
+        margin-inline: 0 !important;
+      }
+
+      & #sidebar-spacer {
+        min-width: 8px !important;
+      }
+    }
+
+    /* Sidebar positioned on the left. */
+    &:not([positionend]) {
+      border-inline-end: 1px solid var(--sidebar-border-color);
+      /* Use less padding on the side with the border. */
+      padding-inline: 4px 3px;
+    }
+
+    /* Sidebar positioned on the right. */
+    &[positionend] {
+      border-inline-start: 1px solid var(--sidebar-border-color);
+      /* Use less padding on the side with the border. */
+      padding-inline: 3px 4px;
+    }
+
+    /* Rounded corners tweak optimisations. */
+    @media (-moz-bool-pref: "uc.tweak.rounded-corners") {
+      /* Remove padding and border from sidebar. */
+      &:not([positionend]),
+      &[positionend] {
+        border-inline: none;
+        padding-inline: 0;
+      }
+
+      &:not([positionend]) {
+        padding-inline-end: 3px;
+      }
+
+      &[positionend] {
+        padding-inline-start: 3px;
+      }
+
+      & #sidebar-header {
+        padding-top: 4px !important;
+      }
+    }
+  }
+}
