@@ -1,0 +1,34 @@
+{
+    "workbench.colorTheme": "Catppuccin Macchiato",
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "window.menuBarVisibility": "toggle",
+    "code-runner.runInTerminal": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.autoSave": "afterDelay",
+
+
+
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "'Fira Code', 'monospace', monospace",
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.location": "hidden",
+    "workbench.sideBar.location": "right",
+    "editor.lineNumbers": "relative",
+    "breadcrumbs.enabled": false,
+    "workbench.editor.enablePreview": false,
+
+
+
+
+    "vscode_custom_css.imports": [
+        "file:///home/matti/.config/vsc/custom.css",
+        "file:///home/matti/.config/vsc/custom.js",
+    ],
+
+
+    "editor.hideCursorInOverviewRuler": true,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.startupEditor": "none"
+}
