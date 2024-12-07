@@ -1,0 +1,66 @@
+{
+	"matti.sty template": {
+	"prefix": "mattemplate",
+	"body": [
+		"\\documentclass{scrartcl}",
+		"\\usepackage[solns, tintpage]{matti}",
+		"",
+		"\\title{Title}",
+		"\\author{Mateo Campos}",
+		"\\date{October 2024}",
+		"",
+		"\\begin{document}",
+		"    \\maketitle",
+		" ",
+		"",
+		"\\end{document}",
+		""
+	],
+	"description": "matti.sty template"
+	},
+	"Auto-split into two minipages": {
+	"prefix": "/\\_split",
+	"body": [
+		"\\begin{minipage}{0.45\\linewidth}",
+		"    $1",
+		"\\end{minipage}",
+		"\\hfill",
+		"\\begin{minipage}{0.45\\linewidth}",
+		"\\begin{flushright}",
+		"",
+		"\\end{flushright}",
+		"\\end{minipage}"
+	],
+	"description": "Auto-split into two minipages"
+	},
+
+	"Align* Environment": {
+	"prefix": "/\\align*",
+	"body": [
+		"\\begin{align*}",
+		"    $1",
+		"\\end{align*}"
+	],
+	"description": "Align* Environment"
+	},
+	
+	"Align Environment": {
+	  "prefix": "/\\align",
+	  "body": [
+	    "\\begin{align}",
+	    "",
+	    "\\end{align}"
+	  ],
+	  "description": "Align Environment"
+	},
+	
+	"Solution Environment": {
+		"prefix": "/\\sol",
+		"body": [
+		  "\\begin{soln}",
+		  "",
+		  "\\end{soln}"
+		],
+		"description": "Solution Environment"
+	  }
+}
