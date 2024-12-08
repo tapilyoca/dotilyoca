@@ -1,5 +1,7 @@
 ## Prerequisites
 Assumes you're using [Archcraft Hyprland](https://wiki.archcraft.io/docs/wayland-compositors/hyprland/) and (most) of the default apps that come with it. No I will not provide a copy of the ISO.
+Any instructions (and all of the files) here assume you are using Hyprland, or at the very least Arch Linux or some Arch-based distro. For Windows users looking to get something similar,
+you may refer to [this](https://wiki.archlinux.org/title/Installation_guide).
 
 
 ## Hyprland
@@ -24,4 +26,4 @@ To fix this, in each app's `.desktop` file (in `/usr/share/applications`, or, mo
 `--enable-features=UseOzonePlatform --ozone-platform=wayland`. **Make sure you are using the AUR version of Spotify, and not the spotify-launcher package.**
 
 ## LaTeX
-Put the `matti.sty` file in `~/texmf/tex/latex/`
+Put the `matti.sty` and `catppuccinpalette.sty` files in `~/texmf/tex/latex/`.
