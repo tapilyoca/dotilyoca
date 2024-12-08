@@ -1,11 +1,10 @@
-will format everything better later but:
-
 ## Firefox
 Heavily modified version of [EdgyArc-Fr](https://github.com/artsyfriedchicken/EdgyArc-fr) tailored specifically for Arch Linux / hyprland. Just drag the chrome folder in and install as you would.
 Requires the following extensions:
 - [Sidebery](https://addons.mozilla.org/en-US/firefox/addon/sidebery/) (for side tabs)
 - [UserChrome Toggle](https://addons.mozilla.org/en-US/firefox/addon/userchrome-toggle/) (for autocollapsing sidebar)
 - [Firefox Color](https://addons.mozilla.org/en-US/firefox/addon/firefox-color/) (for pretty colors)
+
 Also makes any extension with an SVG icon pink when placed in the sidebar. For png icons (yuck), Dark Reader and CPH submit have colored icons just because I use those.
 
 
