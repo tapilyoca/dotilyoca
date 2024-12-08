@@ -19,6 +19,12 @@
     visibility: collapse !important;
   }
 
+  /* Hide mute button which is just annoying */
+  @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+  .tabbrowser-tab :-moz-any(.tab-icon-sound,.tab-icon-overlay[muted]) {
+    display: none;
+  }
+
   /* Fix issue with missing window controls. */
   &[tabsintitlebar] #titlebar {
     will-change: auto !important;

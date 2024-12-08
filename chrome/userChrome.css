@@ -9,10 +9,8 @@
 @import url("global/popup.css");
 @import url("global/browser.css");
 @import url("global/tree.css");
-
-/* Edge-Frfox tweaks */
 @import url("global/tweaks.css");
 @import url("tweaks/hide-tabs-bar.css") (-moz-bool-pref: "uc.tweak.hide-tabs-bar");
 @import url("other/transparency.css");
-
-@import url("custom.css") 
+@import url("other/font.css");
+@import url("custom.css");

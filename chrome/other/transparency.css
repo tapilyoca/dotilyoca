@@ -3,24 +3,3 @@
 --bg: #24273ad9;
 }
 
-/*window transparency*/
-#main-window, #sidebar {
-background: var(--bg) !important;
-}
-
-/*idk*/
-#nav-bar {
-background: transparent  !important;
-}
-
-/*idk but keep*/
-#navigator-toolbox {
-background: transparent !important;
-border: none !important;
-}
-
-/*urlbar*/
-#urlbar-background {
-background: #24273a !important;
-}
-
