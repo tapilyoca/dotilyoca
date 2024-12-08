@@ -1,9 +1,16 @@
+## Prerequisites
+Assumes you're using [Archcraft Hyprland](https://wiki.archcraft.io/docs/wayland-compositors/hyprland/) and (most) of the default apps that come with it. No I will not provide a copy of the ISO.
+
+
+## Hyprland
+Should be mostly drag-and-drop.
+
 ## Firefox
 Heavily modified version of [EdgyArc-Fr](https://github.com/artsyfriedchicken/EdgyArc-fr) tailored specifically for Arch Linux / hyprland. Just drag the chrome folder in and install as you would.
 Requires the following extensions:
-- [Sidebery](https://addons.mozilla.org/en-US/firefox/addon/sidebery/) (for side tabs)
-- [UserChrome Toggle](https://addons.mozilla.org/en-US/firefox/addon/userchrome-toggle/) (for autocollapsing sidebar)
-- [Firefox Color](https://addons.mozilla.org/en-US/firefox/addon/firefox-color/) (for pretty colors)
+- [Sidebery](https://addons.mozilla.org/en-US/firefox/addon/sidebery/)
+- [UserChrome Toggle](https://addons.mozilla.org/en-US/firefox/addon/userchrome-toggle/)
+- [Firefox Color](https://addons.mozilla.org/en-US/firefox/addon/firefox-color/)
 
 Also makes any extension with an SVG icon pink when placed in the sidebar. For png icons (yuck), Dark Reader and CPH submit have colored icons just because I use those.
 
