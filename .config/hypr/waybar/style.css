@@ -7,7 +7,7 @@
 
 /** ********** Fonts ********** **/
 * {
-    font-family: "JetBrains Mono", "Iosevka Nerd Font", archcraft, sans-serif;
+    font-family: "JetBrains Mono Nerd Font", "Iosevka Nerd Font", archcraft, sans-serif;
     font-size: 12px;
 }
 
@@ -16,9 +16,10 @@ window#waybar {
     background-color: @background;
 	color: @background;
     border-bottom: 0px solid @background-alt1;
-	border-radius: 20px;
+	border-radius: 0px 0px 15px 15px;
     transition-property: background-color;
     transition-duration: .5s;
+    opacity: 0.85;
 }
 
 window#waybar.hidden {

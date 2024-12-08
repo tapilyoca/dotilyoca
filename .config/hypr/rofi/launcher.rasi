@@ -16,40 +16,38 @@ configuration {
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
 
-/*****----- Main Window -----*****/
+/*****----- Main Window -----******/
 window {
     /* properties for window widget */
     transparency:                "real";
-    location:                    west;
+    location:                    center;
     anchor:                      west;
     fullscreen:                  false;
-    width:                       500px;
-    height:                      96%;
-    x-offset:                    20px;
+    width:                       33%;
+    height:                      48%;
+    x-offset:                    0px;
     y-offset:                    0px;
 
     /* properties for all widgets */
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      4px solid;
     border-radius:               12px;
-    border-color:                @background-alt;
+    background-image:            linear-gradient(45deg,#f5bde6,#8aadf4);
+    padding: 2px;
     cursor:                      "default";
-    background-color:            @background;
 }
 
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
+    border-radius:               10px;
     spacing:                     20px;
-    margin:                      0px;
+    margin:                      2px;
     padding:                     20px;
-    background-color:            transparent;
+    background-color:            @background;
     children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
-}
-
-/*****----- Inputbar -----*****/
+}/*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
     spacing:                     10px;
@@ -106,6 +104,7 @@ scrollbar {
     handle-width:                5px ;
     handle-color:                @selected;
     border-radius:               10px;
+    margin:                      0 0 0 10px;
     background-color:            @background-alt;
 }
 
@@ -138,7 +137,7 @@ element selected.urgent {
     text-color:                  var(background);
 }
 element selected.normal {
-    background-color:            var(selected);
+    background-image:            linear-gradient(45deg,#f5bde6,#8aadf4);
     text-color:                  var(background);
 }
 element-icon {
