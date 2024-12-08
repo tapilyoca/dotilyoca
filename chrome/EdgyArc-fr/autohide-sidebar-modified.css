@@ -1,0 +1,39 @@
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_sidebar.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/*
+  Enhanced by Prit Cee (@pritceeart)
+  This customization is shared under the Mozilla Public License v. 2.0.
+  Feel free to use, adapt, and elevate as needed. No support is provided, and your creativity is the limit.
+  Kindly respect the original license by MrOtherGuy.
+*/
+
+
+/* Apply styles only when toggled using the userchrome toggle addon */
+:root[titlepreface="᠎"] {
+    #sidebar-box{   
+        --uc-sidebar-width: 46px;   
+        --uc-sidebar-hover-width: 250px;
+        --uc-stutter-buffer: 20ms;   
+        position: relative; 
+        min-width: var(--uc-sidebar-width) !important;  
+        width: var(--uc-sidebar-width) !important;  
+        max-width: var(--uc-sidebar-width) !important;  
+        z-index: 100; 
+    }
+
+    #sidebar{
+        transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1) !important;
+        transition-delay: var(--uc-stutter-buffer) !important; /* fixes some stutter issues */
+        min-width: var(--uc-sidebar-width) !important;  
+        will-change: min-width; 
+    }
+
+    #sidebar-box:hover > #sidebar-header,#sidebar-box:hover > #sidebar{
+        min-width: var(--uc-sidebar-hover-width) !important;
+        transition-delay: var(--uc-stutter-buffer) !important;
+    }
+}
+
+
