@@ -9,6 +9,7 @@
 * {
     font-family: "JetBrains Mono Nerd Font", "Iosevka Nerd Font", archcraft, sans-serif;
     font-size: 12px;
+    font-weight: 600;
 }
 
 /** ********** Waybar Window ********** **/
@@ -16,7 +17,7 @@ window#waybar {
     background-color: @background;
 	color: @background;
     border-bottom: 0px solid @background-alt1;
-	border-radius: 0px 0px 15px 15px;
+	border-radius: 15px;
     transition-property: background-color;
     transition-duration: .5s;
     opacity: 0.85;
@@ -28,12 +29,14 @@ window#waybar.hidden {
 
 /** ********** Backlight ********** **/
 #backlight {
-	background-color: @green;
+	background-color: @background-alt1;
+	color: @green;
 }
 
 /** ********** Battery ********** **/
 #battery {
-	background-color: @blue;
+	color: @cyan;
+	background-color: @background-alt1;
 }
 
 #battery.charging {
@@ -60,17 +63,21 @@ window#waybar.hidden {
 
 /** ********** Clock ********** **/
 #clock {
-	background-color: @yellow;
+	margin-right: 6px;
+	color: @yellow;
+	background-color: @background-alt1;
 }
 
 /** ********** CPU ********** **/
 #cpu {
-	background-color: @cyan;
+	color: @cyan;
+	background-color: @background-alt1;
 }
 
 /** ********** Memory ********** **/
 #memory {
-	background-color: @magenta;
+	background-color: @background-alt1;
+	color: @magenta;
 }
 
 /** ********** Disk ********** **/
@@ -80,15 +87,17 @@ window#waybar.hidden {
 
 /** ***** Idle Inhibitor ***** **/
 #idle_inhibitor {
-	background-color: @green;
+	color: @green;
+	background-color: @background-alt1;
 }
 #idle_inhibitor.deactivated {
-	background-color: @red;
+	background-color: @background-alt1;
+	color: @red;
 }
 
 /** ********** Tray ********** **/
 #tray {
-	background-color: @background-alt2;
+	background-color: @background-alt1;
 }
 #tray > .passive {
     -gtk-icon-effect: dim;
@@ -162,20 +171,23 @@ window#waybar.hidden {
 
 /** ********** Pulseaudio ********** **/
 #pulseaudio {
-	background-color: @yellow;
+	background-color: @background-alt1;
+	color: @yellow;
 }
 
 #pulseaudio.bluetooth {
 	background-color: @yellow;
 }
+
 #pulseaudio.muted {
-	background-color: @red;
-	color: @background;
+	color: @red;
+	background-color: @background-alt1;
 }
 
 /** ********** Network ********** **/
 #network {
-	background-color: @magenta;
+	background-color: @background-alt1;
+	color: @magenta;
 }
 
 #network.disconnected,#network.disabled {
@@ -191,12 +203,15 @@ window#waybar.hidden {
 
 /** ********** Bluetooth ********** **/
 #bluetooth {
-	background-color: @cyan;
+	background-color: @background-alt1;
+	color: @cyan;
 }
+
 #bluetooth.disabled{
 	background-color: @background-alt1;
 	color: @foreground;
 }
+
 #bluetooth.off{
 	background-color: @background-alt1;
 	color: @foreground;
@@ -245,17 +260,22 @@ window#waybar.hidden {
 }
 
 #custom-menu {
-	background-color: @selected;
+	background-color: @alt-background1;
+	color: @selected;
 	margin-left: 6px;
 	padding: 2px 6px;
 	font-size: 16px;
 }
 
 #custom-power {
-	background-color: @red;
-	margin-right: 6px;
-	padding: 2px 8px;
-	font-size: 16px;
+	color: @red;
+	background-color: @alt-background1;
+    margin-right: 6px;
+	padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 6px;
+	font-size: 12px;
 }
 
 /** Common style **/
@@ -273,7 +293,7 @@ window#waybar.hidden {
 #pulseaudio,
 #network,
 #bluetooth {
-	border-radius: 12px;
+	border-radius: 8px;
 	margin: 6px 0px;
 	padding: 2px 10px;
 }
