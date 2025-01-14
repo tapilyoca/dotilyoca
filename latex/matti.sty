@@ -24,7 +24,7 @@
 % ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 % DEALINGS IN THE SOFTWARE.
 %
-% by matti campos, last updated 10/19/24
+% by matti campos, last updated 12/26/24
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ProvidesPackage{matti}
@@ -39,11 +39,13 @@
 \newif\ifmattiphysics\mattiphysicsfalse  % physics... will add things when physics becomes not calc.
 \newif\ifmattiflat\mattiflatfalse        % sans serif
 \newif\ifmattidark\mattidarkfalse
+\newif\ifmatticheatsheet\matticheatsheetfalse
 
 \DeclareOption{probset}{\matticalctrue\mattiflattrue\mattiphysicstrue}
 \DeclareOption{solns}{\mattisolnstrue\mattifancytrue}
 \DeclareOption{darkmode}{\mattidarktrue}
 \DeclareOption{flat}{\mattiflattrue}
+\DeclareOption{cheatsheet}{\matticheatsheettrue\mattiflattrue}
 
 \ProcessOptions
 
@@ -56,9 +58,9 @@
   % Note to self: DO NOT USE NATH!!!! AT ALL!!! IT SUCKS!!!
 
   %% Ubiquitous %%
-  \usepackage{amsmath,amssymb, mathtools}
-  \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-  \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+  \usepackage{amsmath,amssymb,mathtools,gensymb}
+  \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+  \newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}
   \newcommand{\pqt}[1]{\left( #1 \right)}
   \newcommand{\bks}[1]{\left[ #1 \right]}
   \newcommand{\abs}[1]{\left | #1 \right|}
@@ -69,6 +71,11 @@
   \newcommand{\hl}[1]{\colorbox{CtpYellow!40}{#1}}
   \newcommand{\wh}{\widehat}
   \newcommand{\eps}{\varepsilon}
+  \newcommand{\ang}{\angle}
+  \newcommand{\dang}{\measuredangle}
+  \newcommand{\tri}{\triangle}
+  \newcommand{\case}[2]{\textit{Case #1: #2}}
+  \renewcommand{\deg}{\degree}
   \providecommand{\arc}[1]{\wideparen{#1}}
   \renewcommand{\emph}[1]{\textit{#1}}
   %% Colors
@@ -84,12 +91,11 @@
   %% Solutions
   \ifmattisolns
     \newcommand{\ans}[1]{
-      \vspace{0.2cm}
-      \textbf{Answer: } \fbox{\ensuremath{#1}}
+      \textbf{Answer: } \fbox{#1}
     }
     \newcommand{\fourch}[4]{ % for 4-choice mulcho
       \par
-        \begin{tabular}{*{4}{@{}p{0.10\textwidth}}}
+        \begin{tabular}{*{4}{@{}p{0.25\textwidth}}}
           (a)~#1 & (b)~#2 & (c)~#3 & (d)~#4
         \end{tabular}
     }
@@ -122,7 +128,7 @@
   \ifmattidark
     \usepackage[mocha, textcolor=true, pagecolor=true]{catppuccinpalette}
   \else
-    \usepackage[latte, pagecolor=true]{catppuccinpalette}
+    \usepackage[latte, pagecolor=false]{catppuccinpalette}
   \fi
   \mdfdefinestyle{mdbluebox}{%
     roundcorner=5pt,
@@ -132,7 +138,7 @@
     skipbelow=2pt,
     linecolor=CtpBlue,
     nobreak=true,
-    backgroundcolor=CtpLavender!10!CtpMantle,
+    backgroundcolor=CtpBlue!5,
   }
   \declaretheoremstyle[
     headfont=\normalfont\bfseries\color{CtpText},
@@ -142,7 +148,7 @@
   ]{basehead}
   \declaretheoremstyle[
     headfont=\sffamily\bfseries\color{CtpBlue},
-    bodyfont=\normalfont\color{CtpText},
+    bodyfont=\normalfont,
     mdframed={style=mdbluebox},
     headpunct={\\[3pt]},
     postheadspace={0pt}
@@ -155,11 +161,11 @@
     topline=false,
     bottomline=false,
     linecolor=CtpBlue,
-    backgroundcolor=CtpBlue!10!CtpBase
+    backgroundcolor=CtpBlue!3!CtpBase!50
   }
   \declaretheoremstyle[
     headfont=\sffamily\bfseries\color{CtpBlue},
-    bodyfont=\normalfont\small\color{CtpText},
+    bodyfont=\normalfont\small\color{black},
     spaceabove=0pt,
     spacebelow=0pt,
     mdframed={style=mdremark}
@@ -191,8 +197,8 @@
   \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
   \declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
   \declaretheorem[style=thmremark,name=Remark,sibling=theorem]{remark}
-  \newenvironment{soln}[1][Solution]{\begin{proof}[\textbf{#1}]}{\end{proof} \vspace{1cm}}
-  \newenvironment{soln*}[1][Solution]{\begin{proof}[\textbf{#1}]}{\end{proof}}
+  \newenvironment{soln}[1][Solution]{\begin{proof}[\textit{#1}]}{\end{proof}}
+  \newenvironment{soln*}[1][Solution]{\begin{proof}[\textit{#1}]}{\end{proof}}
 
   \ifmattisolns
   \fi
@@ -221,9 +227,15 @@
     \usepackage{tikz}
     \usepackage{paralist} % 0-indent lists
     \setlength\parindent{0pt} % remove paragraph indenting
+ 
+    \makeatletter
+    \renewcommand\@seccntformat[1]{\color{red} {\csname the#1 \endcsname}\hspace{0.5em}}
+    \makeatother
+    \usepackage{sectsty}
+    \allsectionsfont{\rmfamily}
   \fi
 
-  %% HEADER SETUP
+  %% HEADINGS SETUP
   \ifmattiphysics
     \usepackage{fancyhdr}
     \setlength\parindent{0pt}
@@ -232,26 +244,63 @@
     \fancyhead{}
     \fancyhead[C]{INTEGRITY * EXCELLENCE * SERVICE}
   \else
-    \usepackage[headsepline]{scrlayer-scrpage}
-    \renewcommand{\headfont}{}
-    \addtolength{\textheight}{3.14cm}
-    \setlength{\footskip}{0.5in}
-    \setlength{\headsep}{10pt}
-    \ihead{\footnotesize\textbf{\theauthor} --- \thedate}
-    \automark{section}
-    \chead{}
-    \ohead{\footnotesize\textbf{\thetitle}}
-    \cfoot{\pagemark}
+    \ifmatticheatsheet
+      \usepackage[margin=0.75in]{geometry} % Optional: Adjust margins
+      \pagestyle{empty}
+    \else 
+      \usepackage[headsepline]{scrlayer-scrpage}
+      \renewcommand{\headfont}{}
+      \addtolength{\textheight}{3.14cm}
+      \setlength{\footskip}{0.5in}
+      \setlength{\headsep}{10pt}
+      \ihead{\footnotesize\textbf{\theauthor} --- \thedate}
+      \automark{section}
+      \chead{}
+      \ohead{\footnotesize\textbf{\thetitle}}
+      \cfoot{\pagemark}
+    \fi
   \fi
 
   \ifmattiflat
     \renewcommand{\familydefault}{\sfdefault}
   \fi
 
-%%% UNTOUCHED %%%
+    %% SECTIONS SETUP
+    \usepackage{titlesec} 
+    \ifmatticheatsheet
+      \setcounter{secnumdepth}{-1} % wipe numbering 
+      \titleformat{\section}
+        {\normalfont\large\bfseries\color{CtpRed}}
+        {}{0.5em}{} 
+      \titleformat{\subsection}
+        {\normalfont\bfseries\color{CtpRed}} 
+        {}{0.5em}{} 
+      % ideally a cheat sheet doesn't have any subsubsections
+      % if it does, it's probably a terrible cheat sheet
+      % to emphasize that point...
+      \titleformat{\subsubsection}
+        {\normalfont\HUGE\bfseries}
+        {\textcolor{CtpRed}{DO NOT DO THIS DO NOT DO THIS}}
+        {999em}
+        {}
 
-
-
+      \else 
+      \titleformat{\section}
+        {\normalfont\Large\bfseries} 
+        {\textcolor{CtpRed}{\S\thesection}} 
+        {0.75em} 
+        {} 
+      \titleformat{\subsection}
+        {\normalfont\large\bfseries} 
+        {\textcolor{CtpRed}{\S\thesubsection}} 
+        {0.5em} 
+        {} 
+      \titleformat{\subsubsection}
+        {\normalfont\large\bfseries} 
+        {\textcolor{CtpRed}{\S\thesubsubsection}} 
+        {0.35em}
+        {}
+    \fi 
 
 %%% PACKAGES %%%
   % For packages, obviously.
@@ -259,9 +308,9 @@
   % These are just packages that are used for the type of file but not in this .sty file.
   
   %% Ubiquitous %%
-  \usepackage[colorlinks]{hyperref}
-
+  \usepackage[colorlinks=true]{hyperref}
+  \hypersetup{linkcolor=NavyBlue}
   \ifmattiphysics
     \usepackage{siunitx}
   \fi
-  
+
