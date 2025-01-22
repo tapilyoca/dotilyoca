@@ -1,0 +1,27 @@
+battery_status=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state:" | awk '{print $2}')
+
+if [[ "$battery_status" == "discharging" ]]; then
+    notify-send "Hyprland" "Fancy things disabled"
+
+    # disable battery intensive things 
+    hyprctl keyword animations:enabled false
+    hyprctl keyword decoration:blur:enabled false
+    hyprctl keyword decoration:shadow:enabled false
+    hyprctl keyword misc:vfr true
+
+    # change opacity to make things readable
+    hyprctl keyword windowrule opacity 0.9, Alacritty
+    hyprctl keyword windowrule opacity 0.9, Thunar
+    hyprctl keyword windowrule opacity 0.9, code
+    hyprctl keyword windowrule opacity 0.9, Code
+
+else
+    notify-send "Hyprland" "Fancy things enabled!"
+    hyprctl keyword animations:enabled ftrue
+    hyprctl keyword decoration:blur:enabled true
+    hyprctl keyword decoration:shadow:enabled true
+    hyprctl keyword misc:vfr true
+
+    hyprctl reload
+fi
+
