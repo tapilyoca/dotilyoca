@@ -29,7 +29,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 local plugins = {
   require 'plugins.catppuccin',
-  require 'plugins.blankindent',
+  -- require 'plugins.blankindent',
   require 'plugins.closer',
   require 'plugins.neotab',
   require 'plugins.neotree',
@@ -37,7 +37,7 @@ local plugins = {
   require 'plugins.treesitter',
   require 'plugins.lsp',
   require 'plugins.lspconfig',
-  require 'plugins.richpresence',
+  -- require 'plugins.richpresence',
   require 'plugins.autocomplete',
   require 'plugins.coderunner',
   require 'plugins.vimbegood',
@@ -74,7 +74,9 @@ vim.opt.runtimepath:append(parser_install_dir) -- fixes an annoying error
 require("nvim-treesitter.install")prefer_git = true
 local config = require("nvim-treesitter.configs")
 config.setup({
-  ensure_installed = {"cpp", "python", "lua", "css"},
+  ensure_installed = {
+        "cpp", "python", "lua", "css", "javascript", "bash", "hyprlang"
+    },
   highlight = {
     enable = true,
     disable = {"latex"},
@@ -84,6 +86,16 @@ config.setup({
   parser_install_dir = parser_install_dir
 })
 
+vim.filetype.add {
+  extension = { rasi = 'rasi' },
+    pattern = {
+      ['.*/waybar/config'] = 'jsonc',
+      ['.*/mako/config'] = 'dosini',
+      ['.*/kitty/*.conf'] = 'bash',
+      ['.*/hypr/.*%.conf'] = 'hyprlang',
+      ['.*/scripts/.*'] = 'bash'
+    },
+}
 
 
 local Rule = require('nvim-autopairs.rule')
