@@ -24,12 +24,14 @@
 \newif\ifmattiflat\mattiflatfalse        % sans serif
 \newif\ifmattidark\mattidarkfalse
 \newif\ifmatticheatsheet\matticheatsheetfalse
+\newif\ifmattismallhead\mattismallheadfalse
 
 \DeclareOption{probset}{\matticalctrue\mattiflattrue\mattiphysicstrue}
-\DeclareOption{solns}{\mattisolnstrue\mattifancytrue}
+\DeclareOption{solns}{\mattisolnstrue\mattifancytrue\matticalctrue}
 \DeclareOption{darkmode}{\mattidarktrue}
 \DeclareOption{flat}{\mattiflattrue}
 \DeclareOption{cheatsheet}{\matticheatsheettrue\mattiflattrue}
+\DeclareOption{smallhead}{\mattismallheadtrue}
 
 \ProcessOptions
 
@@ -45,21 +47,27 @@
 \usepackage{amsmath,amssymb,mathtools,gensymb}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\ceil}[1]{\left \lceil #1 \right \rceil}
+\DeclareMathOperator{\lcm}{lcm}
 \newcommand{\pqt}[1]{\left( #1 \right)}
 \newcommand{\bks}[1]{\left[ #1 \right]}
 \newcommand{\abs}[1]{\left | #1 \right|}
 \newcommand{\ol}{\overline}
 \newcommand{\ul}{\underline}
+\newcommand{\blank}{\rule{1cm}{0.15mm}}
+\newcommand{\sblank}{\rule{0.5cm}{0.15mm}}
+\renewcommand{\sp}{\quad}
+\newcommand{\totient}[1]{\phi\left(#1\right)}
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
 \newcommand{\wt}{\widetilde}
-\newcommand{\hl}[1]{\colorbox{CtpYellow!40}{#1}}
+\newcommand{\hl}[1]{\colorbox{CtpPink!40}{#1}}
 \newcommand{\wh}{\widehat}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\ang}{\angle}
+\newcommand{\agl}{\angle}
 \newcommand{\dang}{\measuredangle}
 \newcommand{\tri}{\triangle}
 \newcommand{\case}[2]{\textit{Case #1: #2}}
 \renewcommand{\deg}{\degree}
+\newcommand{\dsum}[2]{\displaystyle\sum\limits_{#1}^{#2}}
 \providecommand{\arc}[1]{\wideparen{#1}}
 \renewcommand{\emph}[1]{\textit{#1}}
 \newcommand{\pnt}[1]{\vspace{0.16em} \textbf{#1} \vspace{0.16em}}
@@ -90,8 +98,13 @@
 
 %% Calc stuff
 \ifmatticalc
-	\newcommand{\dd}[1]{\ensuremath{\frac{\mathrm{d}}{\mathrm{d}x}}}
-	\renewcommand{\d}[1]{\ensuremath{\mathrm{d} #1}}
+    \usepackage{xifthen}
+    \newcommand{\dd}[2][]{%
+        \ifthenelse{\equal{#1}{}}%
+            {\frac{\mathrm d}{\mathrm d#2}} % case for \dd{x}
+            {\frac{\mathrm d#1}{\mathrm d#2}} % case for \dd{y}{x}
+    }
+   	\renewcommand{\d}[1]{\ensuremath{\mathrm{d} #1}}
 	\newcommand{\limt}[2]{\ensuremath{\lim_{#1 \to #2}}}
 \fi
 
@@ -128,7 +141,7 @@
 	backgroundcolor=CtpBlue!5,
 }
 \declaretheoremstyle[
-	headfont=\normalfont\bfseries\color{CtpText},
+	headfont=\normalfont\bfseries\color{CtpBlue},
 	spaceabove=8pt,
 	spacebelow=8pt,
 	bodyfont=\normalfont
@@ -166,7 +179,7 @@
 	topline=false,
 	bottomline=false,
 	linecolor=CtpGreen,
-	backgroundcolor=CtpGreen!15,
+	backgroundcolor=CtpGreen!8,
 }
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily\color{CtpGreen!70!black},
@@ -176,17 +189,41 @@
 	mdframed={style=mdgreenbox},
 	headpunct={ --- },
 ]{thmgreenbox}
+\mdfdefinestyle{mdredbox}{%
+    linewidth=0.5pt,
+    skipabove=12pt,
+    frametitleaboveskip=5pt,
+    frametitlebelowskip=0pt,
+    skipbelow=2pt,
+    frametitlefont=\bfseries,
+    innertopmargin=4pt,
+    innerbottommargin=8pt,
+    nobreak=true,
+    backgroundcolor=CtpMaroon!7,
+    linecolor=CtpMaroon,
+    roundcorner=5pt
+}
+\declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{CtpMaroon},
+    mdframed={style=mdredbox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt},
+    ]{thmredbox}
 
 
 \declaretheorem[style=thmbluebox,name=Theorem]{theorem}
 \declaretheorem[style=basehead,name=Problem,sibling=theorem]{problem}
 \declaretheorem[style=basehead,name=Definition,sibling=theorem]{definition}
 \declaretheorem[style=thmbluebox,name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[style=thmbluebox,name=Problem,sibling=theorem]{blockprob}
+\declaretheorem[style=thmbluebox,name=Conjectuve,sibling=theorem]{conjecture}
 \declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
 \declaretheorem[style=thmremark,name=Remark,sibling=theorem]{remark}
-\newenvironment{soln}[1][Solution]{\begin{proof}[\sffamily\textbf{#1}]}{\end{proof}}
-\newenvironment{soln*}[1][Solution]{\begin{proof}[\sffamily\textbf{#1}]}{\end{proof}}
+\newenvironment{soln}[1][Solution]{\begin{proof}[\normalfont \sffamily \textbf{#1}]}{\end{proof}}
+\newenvironment{soln*}[1][Solution]{\begin{proof}[\normalfont \sffamily \textbf{#1}]}{\end{proof}}
 
+\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+\declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
 \ifmattisolns
 \fi
 
@@ -226,10 +263,12 @@
 	\pagestyle{fancy}
 	\chead
 	\fancyhead{}
-	\fancyhead[C]{INTEGRITY * EXCELLENCE * SERVICE}
+	\fancyhead[C]{INTEGRITY $\cdot$ EXCELLENCE $\cdot$ SERVICE}
+    \fancyhead[R]{}
+    \usepackage[bottom=1.5in]{geometry}
 \else
 	\ifmatticheatsheet
-		\usepackage[margin=0.5in]{geometry} % Optional: Adjust margins
+		\usepackage[margin=0.25in]{geometry} % Optional: Adjust margins
 		\pagestyle{empty}
 		\setlength{\parindent}{0pt}
 	\else
@@ -245,15 +284,18 @@
 			\ohead{\sffamily\footnotesize\theauthor}
 			\cfoot{\pagemark}
 		\fi
-		\renewcommand{\maketitle}{
-			\thispagestyle{empty}
-			\begin{flushleft}
-				{\huge\bfseries\sffamily \thetitle \par}
-				\vspace{0.5em}
-				{\large\sffamily by \theauthor \hfill \thedate \par}
-			\end{flushleft}
-			\hrule
-			\vspace{1em}}
+        \ifmattismallhead
+		    \renewcommand{\maketitle}{
+		    	\thispagestyle{empty}
+			    \begin{flushleft}
+		    		{\huge\bfseries\sffamily \thetitle \par}
+		    		\vspace{0.5em}
+		    		{\large\sffamily by \theauthor \hfill \thedate \par}
+		    	\end{flushleft}
+		    	\hrule
+		    	\vspace{1em}
+            }
+        \fi
 	\fi
 \fi
 
@@ -289,11 +331,17 @@
 	\addtokomafont{subsubsection}{\normalfont\large\bfseries}
 
 	% define section, subsection, and subsubsection labels
-	\renewcommand{\thesection}{\textcolor{CtpRed}{\sffamily\S\arabic{section}}}
-    \renewcommand{\thesubsection}{\textcolor{CtpRed}{\sffamily\S\thesection.\arabic{subsection}}}
-	\renewcommand{\thesubsubsection}{\textcolor{CtpRed}{\sffamily\S\thesubsection.\arabic{subsubsection}}}
+    % Keep default numbering for references
+    \renewcommand{\thesection}{\arabic{section}}
+    \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+    \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 
-	% adjust spacing after the labels
+    % Customize section formatting
+    \makeatletter
+    \renewcommand{\sectionformat}{\sffamily\textcolor{CtpRed}{\S\thesection}  \hspace{0.1em}  }
+    \renewcommand{\subsectionformat}{\sffamily\textcolor{CtpRed}{\S\thesubsection} \hspace{0.1em}  }
+    \renewcommand{\subsubsectionformat}{\sffamily\textcolor{CtpRed}{\S\thesubsubsection} \hspace{0.1em}  }
+    \makeatother	% adjust spacing after the labels
 	\RedeclareSectionCommand[
 		beforeskip=0.75em plus 0.5em minus 0.2em,
 		afterskip=1em
